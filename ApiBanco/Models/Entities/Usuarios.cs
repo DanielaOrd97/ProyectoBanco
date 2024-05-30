@@ -11,7 +11,7 @@ public partial class Usuarios
 
     public string Contraseña { get; set; } = null!;
 
-    public string Nombre { get; set; } = null!;
+    public string? Nombre { get; set; }
 
     public bool? EsAdmin { get; set; }
 

@@ -16,15 +16,15 @@ public partial class SistemaDeEsperaContext : DbContext
     {
     }
 
-    public virtual DbSet<Servicios> Servicios { get; set; }
+    public virtual DbSet<Cajas> Cajas { get; set; }
 
     public virtual DbSet<Turnos> Turnos { get; set; }
 
     public virtual DbSet<Usuarios> Usuarios { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;user=root;database=SistemaDeEspera;password=root", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.28-mysql"));
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseMySql("server=localhost;user=root;password=root;database=SistemaDeEspera", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.28-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -32,13 +32,13 @@ public partial class SistemaDeEsperaContext : DbContext
             .UseCollation("utf8mb4_0900_ai_ci")
             .HasCharSet("utf8mb4");
 
-        modelBuilder.Entity<Servicios>(entity =>
+        modelBuilder.Entity<Cajas>(entity =>
         {
-            entity.HasKey(e => e.IdServicio).HasName("PRIMARY");
+            entity.HasKey(e => e.IdCaja).HasName("PRIMARY");
 
-            entity.ToTable("servicios");
+            entity.ToTable("cajas");
 
-            entity.Property(e => e.NombreServicio).HasMaxLength(50);
+            entity.Property(e => e.NombreCaja).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Turnos>(entity =>
@@ -47,14 +47,14 @@ public partial class SistemaDeEsperaContext : DbContext
 
             entity.ToTable("turnos");
 
-            entity.HasIndex(e => e.ServicioId, "ServicioId");
+            entity.HasIndex(e => e.CajaId, "CajaId");
 
             entity.HasIndex(e => e.UsuarioId, "UsuarioId");
 
             entity.Property(e => e.EstadoTurno).HasMaxLength(20);
 
-            entity.HasOne(d => d.Servicio).WithMany(p => p.Turnos)
-                .HasForeignKey(d => d.ServicioId)
+            entity.HasOne(d => d.Caja).WithMany(p => p.Turnos)
+                .HasForeignKey(d => d.CajaId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("turnos_ibfk_2");
 
