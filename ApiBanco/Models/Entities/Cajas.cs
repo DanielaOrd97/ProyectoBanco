@@ -12,4 +12,6 @@ public partial class Cajas
     public sbyte? Estado { get; set; }
 
     public virtual ICollection<Turnos> Turnos { get; set; } = new List<Turnos>();
+
+    public virtual ICollection<Usuarios> Usuarios { get; set; } = new List<Usuarios>();
 }

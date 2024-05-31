@@ -70,10 +70,16 @@ public partial class SistemaDeEsperaContext : DbContext
 
             entity.ToTable("usuarios");
 
+            entity.HasIndex(e => e.IdCaja, "IdCaja");
+
             entity.Property(e => e.Contraseña).HasMaxLength(50);
             entity.Property(e => e.FechaDeRegistro).HasColumnType("datetime");
             entity.Property(e => e.Nombre).HasMaxLength(50);
             entity.Property(e => e.NombreUsuario).HasMaxLength(50);
+
+            entity.HasOne(d => d.IdCajaNavigation).WithMany(p => p.Usuarios)
+                .HasForeignKey(d => d.IdCaja)
+                .HasConstraintName("IdCaja");
         });
 
         OnModelCreatingPartial(modelBuilder);

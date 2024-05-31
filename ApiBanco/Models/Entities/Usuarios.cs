@@ -19,5 +19,9 @@ public partial class Usuarios
 
     public DateTime? FechaDeRegistro { get; set; }
 
+    public int? IdCaja { get; set; }
+
+    public virtual Cajas? IdCajaNavigation { get; set; }
+
     public virtual ICollection<Turnos> Turnos { get; set; } = new List<Turnos>();
 }
