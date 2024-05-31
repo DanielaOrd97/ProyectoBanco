@@ -52,7 +52,7 @@ namespace ApiBanco.Controllers
         }
 
         /// <summary>
-        /// MOSTRAR SOLO AQUELLOS QUE SON OPERADORES.
+        /// MOSTRAR SOLO AQUELLOS QUE SON OPERADORES. (ACCION PARA EL ADMIN)
         /// </summary>
 
         [HttpGet("Operadores")]
@@ -66,7 +66,7 @@ namespace ApiBanco.Controllers
         }
 
         ///<summary>
-        ///BUSCAR UN OPERADOR EN ESPECIFICO
+        ///BUSCAR UN OPERADOR EN ESPECIFICO.  (ACCION PARA EL ADMIN)
         /// </summary>
         [HttpGet("Operador/{id}")]
         public IActionResult GetOperador(int id)
@@ -81,7 +81,7 @@ namespace ApiBanco.Controllers
         }
 
         ///<summary>
-        ///AGREGAR UN OPERADOR.
+        ///AGREGAR UN OPERADOR.  (ACCION PARA EL ADMIN)
         /// </summary>
         [HttpPost("AgregarOperador")]
         public IActionResult PostOperador(OperadorDTO dto)
@@ -99,7 +99,7 @@ namespace ApiBanco.Controllers
         }
 
         ///<summary>
-        ///EDITAR UN OPERADOR
+        ///EDITAR UN OPERADOR.  (ACCION PARA EL ADMIN)
         /// </summary>
         /// 
         [HttpPut("EditarOperador")]
@@ -112,7 +112,7 @@ namespace ApiBanco.Controllers
                 if (operador != null)
                 {
 
-                    operador.NombreUsuario = dto.Nombre;
+                    operador.NombreUsuario = dto.NombreUsuario;
                     operador.Contraseña = dto.Contraseña;
                     operador.Nombre = dto.Nombre;
                     operador.EsOperador = operador.EsOperador;
@@ -135,7 +135,7 @@ namespace ApiBanco.Controllers
         }
 
         /// <summary>
-        /// ELIMINAR UN OPERADOR
+        /// ELIMINAR UN OPERADOR.  (ACCION PARA EL ADMIN)
         /// </summary>
 
         [HttpDelete("EliminarOperador/{id}")]
